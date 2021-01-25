@@ -6,8 +6,33 @@ import pandas as pd
 app = dash.Dash(__name__)
 data = pd.read_csv("test_data.csv")
 app.layout = html.Div(children=[
+    html.Div(children=[
         html.H1(children="Jehovah's Witnesses Statistics"),
         html.P(children="Analyze various statistics of Jehovah's Witnesses"),
+        html.Br(),
+        dcc.Dropdown(
+            id="year-dropdown",
+            options=[{'label': x, 'value': x}
+                     for x in data["Year"].tolist()],
+            value=data["Year"].tolist()[0]),
+        dcc.Dropdown(
+            id="year-dropdown-2",
+            options=[{'label': x, 'value': x}
+                     for x in data["Year"].tolist()],
+            value=data["Year"].tolist()[0]),
+    ]),
+    html.Div(children=[
+        dcc.Graph(id="total-congs"),
+        dcc.Graph(id="memorial-attendance"),
+        dcc.Graph(id="memorial-partakers"),
+        dcc.Graph(id="peak-pubs"),
+        dcc.Graph(id="av-pubs"),
+        dcc.Graph(id="total-bap"),
+        dcc.Graph(id="total-hours"),
+        dcc.Graph(id="av-studies")
+    
+    ]),
+
         dcc.Graph(
             figure={
                 "data": [
@@ -105,6 +130,17 @@ app.layout = html.Div(children=[
             },
        ),
     ]
+)
+
+@app.callback(
+    [Output("memorial-attendance","figure"),Output("memorial-partakers","figure"),Output("peak-pubs","figure"),
+    Output("av-pubs","figure"),Output("total-bap","figure"),Output("total-hours","figure"),Output("av-studies","figure")]
+    [
+        Input(),
+        Input(),
+        
+    ],
+    
 )
 
 app.run_server(port=8050)
