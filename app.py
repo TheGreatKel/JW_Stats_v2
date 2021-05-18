@@ -1,6 +1,7 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Input, Output
 import pandas as pd
 
 app = dash.Dash(__name__)
@@ -37,7 +38,7 @@ app.layout = html.Div(children=[
 
 @app.callback(
     [Output("memorial-attendance","figure"),Output("memorial-partakers","figure"),Output("peak-pubs","figure"),
-    Output("av-pubs","figure"),Output("total-bap","figure"),Output("total-hours","figure"),Output("av-studies","figure"),Output("total-congs","figure")]
+    Output("av-pubs","figure"),Output("total-bap","figure"),Output("total-hours","figure"),Output("av-studies","figure"),Output("total-congs","figure")],
     [
         Input('year-dropdown','value'),
         Input("year-dropdown-2",'value'),
