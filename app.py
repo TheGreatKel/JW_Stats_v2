@@ -1,14 +1,16 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Input, Output
 import pandas as pd
+
 
 app = dash.Dash(__name__)
 data = pd.read_csv("test_data.csv")
 app.layout = html.Div(children=[
     html.Div(children=[
-        html.H1(children="Jehovah's Witnesses Statistics"),
-        html.H2(children="Grand Totals"),
+        html.H1(children="Jehovah's Witnesses Statistics", className="center"),
+        html.H2(children="Grand Totals", className="center"),
         html.Br(),
         dcc.Dropdown(
             id="year-dropdown",
@@ -22,22 +24,22 @@ app.layout = html.Div(children=[
             value=data["Year"].tolist()[0]),
     ]),
     html.Div(children=[
-        dcc.Graph(id="total-congs"),
-        dcc.Graph(id="memorial-attendance"),
-        dcc.Graph(id="memorial-partakers"),
-        dcc.Graph(id="peak-pubs"),
-        dcc.Graph(id="av-pubs"),
-        dcc.Graph(id="total-bap"),
-        dcc.Graph(id="total-hours"),
-        dcc.Graph(id="av-studies")
+        dcc.Graph(id="total-congs", style={'width': '400px'}),
+        dcc.Graph(id="memorial-attendance", style={'width': '400px'}),
+        dcc.Graph(id="memorial-partakers", style={'width': '400px'}),
+        dcc.Graph(id="peak-pubs", style={'width': '400px'}),
+        dcc.Graph(id="av-pubs", style={'width': '400px'}),
+        dcc.Graph(id="total-bap", style={'width': '400px'}),
+        dcc.Graph(id="total-hours", style={'width': '400px'}),
+        dcc.Graph(id="av-studies", style={'width': '400px'})
     
     ]),
 ])    
 
-
 @app.callback(
     [Output("memorial-attendance","figure"),Output("memorial-partakers","figure"),Output("peak-pubs","figure"),
-    Output("av-pubs","figure"),Output("total-bap","figure"),Output("total-hours","figure"),Output("av-studies","figure"),Output("total-congs","figure")]
+    Output("av-pubs","figure"),Output("total-bap","figure"),Output("total-hours","figure"),
+    Output("av-studies","figure"),Output("total-congs","figure")],
     [
         Input('year-dropdown','value'),
         Input("year-dropdown-2",'value'),
@@ -45,7 +47,7 @@ app.layout = html.Div(children=[
 )
 
 def update_charts(year1, year2):
-    mask = (df['Year'] > year1) & (df['Year'] <= year2)
+    mask = (data['Year'] > year1) & (data['Year'] <= year2)
     filtered_data = data.loc[mask, :]
     memorial_attendance_figure={
         "data": [
