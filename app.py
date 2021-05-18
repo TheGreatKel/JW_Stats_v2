@@ -23,7 +23,7 @@ app.layout = html.Div(children=[
                      for x in data["Year"].tolist()],
             value=data["Year"].tolist()[0]),
     ]),
-    html.Div(children=[
+    html.Div(className="grid", children=[
         dcc.Graph(id="total-congs", style={'width': '400px'}),
         dcc.Graph(id="memorial-attendance", style={'width': '400px'}),
         dcc.Graph(id="memorial-partakers", style={'width': '400px'}),
@@ -38,12 +38,8 @@ app.layout = html.Div(children=[
 
 @app.callback(
     [Output("memorial-attendance","figure"),Output("memorial-partakers","figure"),Output("peak-pubs","figure"),
-<<<<<<< HEAD
-    Output("av-pubs","figure"),Output("total-bap","figure"),Output("total-hours","figure"),Output("av-studies","figure"),Output("total-congs","figure")],
-=======
     Output("av-pubs","figure"),Output("total-bap","figure"),Output("total-hours","figure"),
     Output("av-studies","figure"),Output("total-congs","figure")],
->>>>>>> d972c29084293f1cf7dd48b4d4304b874d0c0f5b
     [
         Input('year-dropdown','value'),
         Input("year-dropdown-2",'value'),

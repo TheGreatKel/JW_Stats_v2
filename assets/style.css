@@ -1,3 +1,12 @@
 .center {
     text-align: center;
-  }
+}
+
+.grid {
+ display : grid;  
+ grid-template-columns: 25% 25% 25% 25%;
+}
+
+.dash-dropdown{
+  width: 40%;
+}
