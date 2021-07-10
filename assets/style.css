@@ -4,7 +4,8 @@
 
 .grid {
  display : grid;  
- grid-template-columns: 25% 25% 25% 25%;
+ grid-template-columns: repeat(4, 25%);
+ grid-auto-columns: minmax(10px, auto);
 }
 
 .dash-dropdown{
